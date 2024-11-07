@@ -18,6 +18,10 @@
 		29FBFAAF2CDADB9600F8EC88 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 29FBFAAE2CDADB9600F8EC88 /* FirebaseCore */; };
 		29FBFAB12CDADB9600F8EC88 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 29FBFAB02CDADB9600F8EC88 /* FirebaseFirestore */; };
 		29FBFAB32CDADB9600F8EC88 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 29FBFAB22CDADB9600F8EC88 /* FirebaseStorage */; };
+		29FBFAB52CDD285800F8EC88 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFAB42CDD285800F8EC88 /* LoginScreenView.swift */; };
+		29FBFAB82CDD2B3B00F8EC88 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFAB72CDD2B3B00F8EC88 /* LoginScreenViewController.swift */; };
+		29FBFABA2CDD2BF500F8EC88 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFAB92CDD2BF500F8EC88 /* MainScreenView.swift */; };
+		29FBFABC2CDD2CDF00F8EC88 /* RightBarButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFABB2CDD2CDF00F8EC88 /* RightBarButtonManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		29FBFA9D2CDAD99200F8EC88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29FBFA9F2CDAD99200F8EC88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29FBFAA92CDADAB000F8EC88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		29FBFAB42CDD285800F8EC88 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
+		29FBFAB72CDD2B3B00F8EC88 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
+		29FBFAB92CDD2BF500F8EC88 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		29FBFABB2CDD2CDF00F8EC88 /* RightBarButtonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBarButtonManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +76,8 @@
 			children = (
 				29FBFA912CDAD99100F8EC88 /* AppDelegate.swift */,
 				29FBFA932CDAD99100F8EC88 /* SceneDelegate.swift */,
-				29FBFA952CDAD99100F8EC88 /* ViewController.swift */,
+				29FBFABD2CDD306000F8EC88 /* Main Screen */,
+				29FBFAB62CDD2AC500F8EC88 /* Login  */,
 				29FBFA972CDAD99100F8EC88 /* Main.storyboard */,
 				29FBFA9A2CDAD99200F8EC88 /* Assets.xcassets */,
 				29FBFA9C2CDAD99200F8EC88 /* LaunchScreen.storyboard */,
@@ -76,6 +85,33 @@
 				29FBFAA92CDADAB000F8EC88 /* GoogleService-Info.plist */,
 			);
 			path = WA8_17;
+			sourceTree = "<group>";
+		};
+		29FBFAB62CDD2AC500F8EC88 /* Login  */ = {
+			isa = PBXGroup;
+			children = (
+				29FBFAB72CDD2B3B00F8EC88 /* LoginScreenViewController.swift */,
+				29FBFAB42CDD285800F8EC88 /* LoginScreenView.swift */,
+			);
+			path = "Login ";
+			sourceTree = "<group>";
+		};
+		29FBFABD2CDD306000F8EC88 /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				29FBFABE2CDD307000F8EC88 /* Views */,
+				29FBFA952CDAD99100F8EC88 /* ViewController.swift */,
+				29FBFABB2CDD2CDF00F8EC88 /* RightBarButtonManager.swift */,
+			);
+			path = "Main Screen";
+			sourceTree = "<group>";
+		};
+		29FBFABE2CDD307000F8EC88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				29FBFAB92CDD2BF500F8EC88 /* MainScreenView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,8 +195,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29FBFAB52CDD285800F8EC88 /* LoginScreenView.swift in Sources */,
+				29FBFABA2CDD2BF500F8EC88 /* MainScreenView.swift in Sources */,
 				29FBFA962CDAD99100F8EC88 /* ViewController.swift in Sources */,
+				29FBFABC2CDD2CDF00F8EC88 /* RightBarButtonManager.swift in Sources */,
 				29FBFA922CDAD99100F8EC88 /* AppDelegate.swift in Sources */,
+				29FBFAB82CDD2B3B00F8EC88 /* LoginScreenViewController.swift in Sources */,
 				29FBFA942CDAD99100F8EC88 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
