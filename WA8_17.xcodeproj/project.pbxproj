@@ -22,6 +22,10 @@
 		29FBFAB82CDD2B3B00F8EC88 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFAB72CDD2B3B00F8EC88 /* LoginScreenViewController.swift */; };
 		29FBFABA2CDD2BF500F8EC88 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFAB92CDD2BF500F8EC88 /* MainScreenView.swift */; };
 		29FBFABC2CDD2CDF00F8EC88 /* RightBarButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFABB2CDD2CDF00F8EC88 /* RightBarButtonManager.swift */; };
+		3FF7DB8F2CDD36B300F8B5EF /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DB8E2CDD36B300F8B5EF /* ChatTableViewCell.swift */; };
+		3FF7DB912CDD36C400F8B5EF /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DB902CDD36C400F8B5EF /* Chat.swift */; };
+		3FF7DB952CDD411B00F8B5EF /* ChatsTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DB942CDD411B00F8B5EF /* ChatsTableViewManager.swift */; };
+		3FF7DB972CDD419A00F8B5EF /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DB962CDD419A00F8B5EF /* Configs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,10 @@
 		29FBFAB72CDD2B3B00F8EC88 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		29FBFAB92CDD2BF500F8EC88 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		29FBFABB2CDD2CDF00F8EC88 /* RightBarButtonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBarButtonManager.swift; sourceTree = "<group>"; };
+		3FF7DB8E2CDD36B300F8B5EF /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		3FF7DB902CDD36C400F8B5EF /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		3FF7DB942CDD411B00F8B5EF /* ChatsTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewManager.swift; sourceTree = "<group>"; };
+		3FF7DB962CDD419A00F8B5EF /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +107,12 @@
 		29FBFABD2CDD306000F8EC88 /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
+				3FF7DB962CDD419A00F8B5EF /* Configs.swift */,
 				29FBFABE2CDD307000F8EC88 /* Views */,
 				29FBFA952CDAD99100F8EC88 /* ViewController.swift */,
+				3FF7DB902CDD36C400F8B5EF /* Chat.swift */,
 				29FBFABB2CDD2CDF00F8EC88 /* RightBarButtonManager.swift */,
+				3FF7DB942CDD411B00F8B5EF /* ChatsTableViewManager.swift */,
 			);
 			path = "Main Screen";
 			sourceTree = "<group>";
@@ -110,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				29FBFAB92CDD2BF500F8EC88 /* MainScreenView.swift */,
+				3FF7DB8E2CDD36B300F8B5EF /* ChatTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,10 +210,14 @@
 				29FBFAB52CDD285800F8EC88 /* LoginScreenView.swift in Sources */,
 				29FBFABA2CDD2BF500F8EC88 /* MainScreenView.swift in Sources */,
 				29FBFA962CDAD99100F8EC88 /* ViewController.swift in Sources */,
+				3FF7DB952CDD411B00F8B5EF /* ChatsTableViewManager.swift in Sources */,
 				29FBFABC2CDD2CDF00F8EC88 /* RightBarButtonManager.swift in Sources */,
+				3FF7DB912CDD36C400F8B5EF /* Chat.swift in Sources */,
 				29FBFA922CDAD99100F8EC88 /* AppDelegate.swift in Sources */,
+				3FF7DB8F2CDD36B300F8B5EF /* ChatTableViewCell.swift in Sources */,
 				29FBFAB82CDD2B3B00F8EC88 /* LoginScreenViewController.swift in Sources */,
 				29FBFA942CDAD99100F8EC88 /* SceneDelegate.swift in Sources */,
+				3FF7DB972CDD419A00F8B5EF /* Configs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

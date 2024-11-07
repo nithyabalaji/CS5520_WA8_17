@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class ViewController: UIViewController {
     
-    //var contactsList = [Contact]()
+    var chatsList = [Chat]()
     var handleAuth: AuthStateDidChangeListenerHandle?
     var currentUser:FirebaseAuth.User?
     //let childProgressView = ProgressSpinnerViewController()
@@ -30,20 +30,20 @@ class ViewController: UIViewController {
                 //MARK: not signed in...
                 self.currentUser = nil
                 self.mainScreen.labelText.text = "Please sign in to see the notes!"
-                //self.mainScreen.floatingButtonAddContact.isEnabled = false
-                //self.mainScreen.floatingButtonAddContact.isHidden = true
+                self.mainScreen.floatingButtonAddChat.isEnabled = false
+                self.mainScreen.floatingButtonAddChat.isHidden = true
                 
                 //MARK: Reset tableView...
                 //self.contactsList.removeAll()
-                //self.mainScreen.tableViewContacts.reloadData()
+                self.mainScreen.tableViewChats.reloadData()
                 
                 self.setupRightBarButton(isLoggedin: false)
             }else{
                 //MARK: the user is signed in...
                 self.currentUser = user
                 self.mainScreen.labelText.text = "Welcome \(user?.displayName ?? "Anonymous")!"
-                //self.mainScreen.floatingButtonAddContact.isEnabled = true
-                //self.mainScreen.floatingButtonAddContact.isHidden = false
+                self.mainScreen.floatingButtonAddChat.isEnabled = true
+                self.mainScreen.floatingButtonAddChat.isHidden = false
                 
                 self.setupRightBarButton(isLoggedin: true)
                 /*
@@ -78,32 +78,33 @@ class ViewController: UIViewController {
         
         //MARK: Make the titles look large...
         navigationController?.navigationBar.prefersLargeTitles = true
-        /*
+        
         //MARK: Put the floating button above all the views...
-        view.bringSubviewToFront(mainScreen.floatingButtonAddContact)
+        view.bringSubviewToFront(mainScreen.floatingButtonAddChat)
         
         //MARK: patching table view delegate and data source...
-        mainScreen.tableViewContacts.delegate = self
-        mainScreen.tableViewContacts.dataSource = self
+        mainScreen.tableViewChats.delegate = self
+        mainScreen.tableViewChats.dataSource = self
         
         //MARK: removing the separator line...
-        mainScreen.tableViewContacts.separatorStyle = .none
+        mainScreen.tableViewChats.separatorStyle = .none
         
-        mainScreen.floatingButtonAddContact.addTarget(self, action: #selector(addContactButtonTapped), for: .touchUpInside)
-         */
+        mainScreen.floatingButtonAddChat.addTarget(self, action: #selector(addContactButtonTapped), for: .touchUpInside)
+        let chat = Chat(senderName: "xxx", lastMessage: "Hello", timestamp: "yesterday")
+        chatsList.append(chat)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         Auth.auth().removeStateDidChangeListener(handleAuth!)
     }
-    /*
+   
     @objc func addContactButtonTapped(){
-        let addContactController = AddContactViewController()
-        addContactController.currentUser = self.currentUser
-        navigationController?.pushViewController(addContactController, animated: true)
+//        let addContactController = AddContactViewController()
+//        addContactController.currentUser = self.currentUser
+//        navigationController?.pushViewController(addContactController, animated: true)
     }
-     */
+    
 }
 
 
