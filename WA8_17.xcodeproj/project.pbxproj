@@ -26,6 +26,11 @@
 		3FF7DB912CDD36C400F8B5EF /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DB902CDD36C400F8B5EF /* Chat.swift */; };
 		3FF7DB952CDD411B00F8B5EF /* ChatsTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DB942CDD411B00F8B5EF /* ChatsTableViewManager.swift */; };
 		3FF7DB972CDD419A00F8B5EF /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DB962CDD419A00F8B5EF /* Configs.swift */; };
+		3FF7DBA92CDDB1AF00F8B5EF /* NewChatTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DBA32CDDB1AF00F8B5EF /* NewChatTableViewManager.swift */; };
+		3FF7DBAA2CDDB1AF00F8B5EF /* NewChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DBA42CDDB1AF00F8B5EF /* NewChatView.swift */; };
+		3FF7DBAB2CDDB1AF00F8B5EF /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DBA52CDDB1AF00F8B5EF /* NewChatViewController.swift */; };
+		3FF7DBAC2CDDB1AF00F8B5EF /* NewChatViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DBA62CDDB1AF00F8B5EF /* NewChatViewTableViewCell.swift */; };
+		3FF7DBAD2CDDB1AF00F8B5EF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DBA72CDDB1AF00F8B5EF /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +51,11 @@
 		3FF7DB902CDD36C400F8B5EF /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		3FF7DB942CDD411B00F8B5EF /* ChatsTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewManager.swift; sourceTree = "<group>"; };
 		3FF7DB962CDD419A00F8B5EF /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
+		3FF7DBA32CDDB1AF00F8B5EF /* NewChatTableViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatTableViewManager.swift; sourceTree = "<group>"; };
+		3FF7DBA42CDDB1AF00F8B5EF /* NewChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatView.swift; sourceTree = "<group>"; };
+		3FF7DBA52CDDB1AF00F8B5EF /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
+		3FF7DBA62CDDB1AF00F8B5EF /* NewChatViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewTableViewCell.swift; sourceTree = "<group>"; };
+		3FF7DBA72CDDB1AF00F8B5EF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +101,7 @@
 				29FBFA9C2CDAD99200F8EC88 /* LaunchScreen.storyboard */,
 				29FBFA9F2CDAD99200F8EC88 /* Info.plist */,
 				29FBFAA92CDADAB000F8EC88 /* GoogleService-Info.plist */,
+				3FF7DBA82CDDB1AF00F8B5EF /* All User Screen */,
 			);
 			path = WA8_17;
 			sourceTree = "<group>";
@@ -124,6 +135,26 @@
 				3FF7DB8E2CDD36B300F8B5EF /* ChatTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3FF7DBA82CDDB1AF00F8B5EF /* All User Screen */ = {
+			isa = PBXGroup;
+			children = (
+				3FF7DBA32CDDB1AF00F8B5EF /* NewChatTableViewManager.swift */,
+				3FF7DBA52CDDB1AF00F8B5EF /* NewChatViewController.swift */,
+				3FF7DBAE2CDDB1BD00F8B5EF /* View */,
+				3FF7DBA72CDDB1AF00F8B5EF /* User.swift */,
+			);
+			path = "All User Screen";
+			sourceTree = "<group>";
+		};
+		3FF7DBAE2CDDB1BD00F8B5EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3FF7DBA42CDDB1AF00F8B5EF /* NewChatView.swift */,
+				3FF7DBA62CDDB1AF00F8B5EF /* NewChatViewTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +243,11 @@
 				29FBFA962CDAD99100F8EC88 /* ViewController.swift in Sources */,
 				3FF7DB952CDD411B00F8B5EF /* ChatsTableViewManager.swift in Sources */,
 				29FBFABC2CDD2CDF00F8EC88 /* RightBarButtonManager.swift in Sources */,
+				3FF7DBA92CDDB1AF00F8B5EF /* NewChatTableViewManager.swift in Sources */,
+				3FF7DBAA2CDDB1AF00F8B5EF /* NewChatView.swift in Sources */,
+				3FF7DBAB2CDDB1AF00F8B5EF /* NewChatViewController.swift in Sources */,
+				3FF7DBAC2CDDB1AF00F8B5EF /* NewChatViewTableViewCell.swift in Sources */,
+				3FF7DBAD2CDDB1AF00F8B5EF /* User.swift in Sources */,
 				3FF7DB912CDD36C400F8B5EF /* Chat.swift in Sources */,
 				29FBFA922CDAD99100F8EC88 /* AppDelegate.swift in Sources */,
 				3FF7DB8F2CDD36B300F8B5EF /* ChatTableViewCell.swift in Sources */,

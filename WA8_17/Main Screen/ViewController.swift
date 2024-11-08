@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         //MARK: removing the separator line...
         mainScreen.tableViewChats.separatorStyle = .none
         
-        mainScreen.floatingButtonAddChat.addTarget(self, action: #selector(addContactButtonTapped), for: .touchUpInside)
+        mainScreen.floatingButtonAddChat.addTarget(self, action: #selector(addChatButtonTapped), for: .touchUpInside)
         let chat = Chat(senderName: "xxx", lastMessage: "Hello", timestamp: "yesterday")
         chatsList.append(chat)
     }
@@ -99,10 +99,10 @@ class ViewController: UIViewController {
         Auth.auth().removeStateDidChangeListener(handleAuth!)
     }
    
-    @objc func addContactButtonTapped(){
-//        let addContactController = AddContactViewController()
-//        addContactController.currentUser = self.currentUser
-//        navigationController?.pushViewController(addContactController, animated: true)
+    @objc func addChatButtonTapped(){
+        let newChatVC = NewChatViewController()
+                
+        navigationController?.pushViewController(newChatVC, animated: true)
     }
     
 }
