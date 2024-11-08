@@ -9,4 +9,5 @@
 import Foundation
 class Configs{
     static let tableViewChatsID = "ChatTableViewCell"
+    static let tableviewUserID = "UserTableViewCell"
 }
