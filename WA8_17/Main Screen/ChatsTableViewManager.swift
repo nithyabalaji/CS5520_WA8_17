@@ -20,4 +20,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         cell.labelTimestamp.text = chatsList[indexPath.row].timestamp
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         
+            let chatVC = ChatMessageViewController()
+            
+        chatVC.title = chatsList[indexPath.row].senderName
+            
+            navigationController?.pushViewController(chatVC, animated: true)
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
 }
