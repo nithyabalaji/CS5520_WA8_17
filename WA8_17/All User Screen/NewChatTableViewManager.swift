@@ -17,4 +17,14 @@ extension NewChatViewController: UITableViewDelegate, UITableViewDataSource{
         cell.labelName.text = userlist[indexPath.row].Name
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+            let chatVC = ChatMessageViewController()
+            
+            chatVC.title = userlist[indexPath.row].Name
+            
+            navigationController?.pushViewController(chatVC, animated: true)
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
 }
