@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -70,6 +70,10 @@
 		3FF7DBA72CDDB1AF00F8B5EF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D53E3C882CE418B40041C9E3 /* Register screen */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Register screen"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		29FBFA8B2CDAD99100F8EC88 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -104,6 +108,7 @@
 		29FBFA902CDAD99100F8EC88 /* WA8_17 */ = {
 			isa = PBXGroup;
 			children = (
+				D53E3C882CE418B40041C9E3 /* Register screen */,
 				29FBFA912CDAD99100F8EC88 /* AppDelegate.swift */,
 				29FBFA932CDAD99100F8EC88 /* SceneDelegate.swift */,
 				29FBFABD2CDD306000F8EC88 /* Main Screen */,
@@ -205,6 +210,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D53E3C882CE418B40041C9E3 /* Register screen */,
 			);
 			name = WA8_17;
 			packageProductDependencies = (
