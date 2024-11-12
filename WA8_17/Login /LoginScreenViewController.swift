@@ -58,10 +58,11 @@ class LoginScreenViewController: UIViewController {
         })
     }
     
-    @objc func onButtonRegisterTapped(){
-        //let registerController = RegisterScreenViewController()
-        //navigationController?.pushViewController(registerController, animated: true)
+    @objc func onButtonRegisterTapped() {
+        let registerController = RegisterScreenViewController()
+        navigationController?.pushViewController(registerController, animated: true)
     }
+
     
     
     
