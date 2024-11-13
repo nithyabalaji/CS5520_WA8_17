@@ -21,7 +21,6 @@
 		29FBFAB52CDD285800F8EC88 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFAB42CDD285800F8EC88 /* LoginScreenView.swift */; };
 		29FBFAB82CDD2B3B00F8EC88 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFAB72CDD2B3B00F8EC88 /* LoginScreenViewController.swift */; };
 		29FBFABA2CDD2BF500F8EC88 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFAB92CDD2BF500F8EC88 /* MainScreenView.swift */; };
-		29FBFABC2CDD2CDF00F8EC88 /* RightBarButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBFABB2CDD2CDF00F8EC88 /* RightBarButtonManager.swift */; };
 		3F7DDD662CE2920A004A5149 /* ChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DDD652CE2920A004A5149 /* ChatScreenView.swift */; };
 		3F7DDD682CE29258004A5149 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DDD672CE29258004A5149 /* ChatMessage.swift */; };
 		3F7DDD6C2CE3EDE8004A5149 /* UserMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DDD6B2CE3EDE8004A5149 /* UserMessageTableViewCell.swift */; };
@@ -52,7 +51,6 @@
 		29FBFAB42CDD285800F8EC88 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		29FBFAB72CDD2B3B00F8EC88 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		29FBFAB92CDD2BF500F8EC88 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
-		29FBFABB2CDD2CDF00F8EC88 /* RightBarButtonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightBarButtonManager.swift; sourceTree = "<group>"; };
 		3F7DDD652CE2920A004A5149 /* ChatScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenView.swift; sourceTree = "<group>"; };
 		3F7DDD672CE29258004A5149 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		3F7DDD6B2CE3EDE8004A5149 /* UserMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 				29FBFABE2CDD307000F8EC88 /* Views */,
 				29FBFA952CDAD99100F8EC88 /* ViewController.swift */,
 				3FF7DB902CDD36C400F8B5EF /* Chat.swift */,
-				29FBFABB2CDD2CDF00F8EC88 /* RightBarButtonManager.swift */,
 				3FF7DB942CDD411B00F8B5EF /* ChatsTableViewManager.swift */,
 			);
 			path = "Main Screen";
@@ -287,7 +284,6 @@
 				29FBFA962CDAD99100F8EC88 /* ViewController.swift in Sources */,
 				3FF7DB952CDD411B00F8B5EF /* ChatsTableViewManager.swift in Sources */,
 				3F7DDD702CE3EE9A004A5149 /* ChatMessageViewController.swift in Sources */,
-				29FBFABC2CDD2CDF00F8EC88 /* RightBarButtonManager.swift in Sources */,
 				3FF7DBA92CDDB1AF00F8B5EF /* NewChatTableViewManager.swift in Sources */,
 				3FF7DBAA2CDDB1AF00F8B5EF /* NewChatView.swift in Sources */,
 				3FF7DBAB2CDDB1AF00F8B5EF /* NewChatViewController.swift in Sources */,
