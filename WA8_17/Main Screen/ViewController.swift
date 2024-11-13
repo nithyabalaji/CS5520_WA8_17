@@ -3,67 +3,61 @@
 //  WA8_17
 //
 //  Created by Dina Barua on 11/13/24
-//
 
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     // MARK: - Properties
     var chatsList = [Chat]()
     var handleAuth: AuthStateDidChangeListenerHandle?
     var currentUser: FirebaseAuth.User?
     let mainScreen = MainScreenView()
     let db = Firestore.firestore()
+    var userName: String = "Anonymous"
 
     override func loadView() {
         view = mainScreen
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Check if a user is already logged in
+
         if Auth.auth().currentUser == nil {
-            // No user is logged in, present login screen
             presentLoginScreen()
         } else {
-            // User is logged in, handle logged-in state
             setupAuthenticatedUI()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Chats"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Set up table view
         mainScreen.tableViewChats.delegate = self
         mainScreen.tableViewChats.dataSource = self
         mainScreen.tableViewChats.separatorStyle = .none
         
-        // Set up floating button
         mainScreen.floatingButtonAddChat.addTarget(self, action: #selector(addChatButtonTapped), for: .touchUpInside)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let handleAuth = handleAuth {
-            Auth.auth().removeStateDidChangeListener(handleAuth)
+
+    func fetchCurrentUserName() {
+        guard let email = Auth.auth().currentUser?.email else { return }
+        
+        db.collection("users").document(email).getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.userName = document.data()?["name"] as? String ?? "Anonymous"
+                self.mainScreen.labelText.text = "Welcome \(self.userName)!"
+            } else {
+                print("Document does not exist")
+            }
         }
     }
-    
-    // MARK: - Actions
-    @objc func addChatButtonTapped() {
-        let newChatVC = NewChatViewController()
-        navigationController?.pushViewController(newChatVC, animated: true)
-    }
 
-    // MARK: - Login and UI Setup Methods
     private func presentLoginScreen() {
         let loginController = LoginScreenViewController()
         loginController.modalPresentationStyle = .fullScreen
@@ -71,12 +65,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     private func setupAuthenticatedUI() {
-        // Set up UI for authenticated user
         handleAuth = Auth.auth().addStateDidChangeListener { [weak self] auth, user in
             guard let self = self else { return }
             if let user = user {
                 self.currentUser = user
-                self.mainScreen.labelText.text = "Welcome \(user.displayName ?? "Anonymous")!"
+                self.fetchCurrentUserName()
                 self.mainScreen.floatingButtonAddChat.isEnabled = true
                 self.mainScreen.floatingButtonAddChat.isHidden = false
                 self.setupRightBarButton(isLoggedin: true)
@@ -89,8 +82,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-    
-    // MARK: - Right Bar Button Setup
+
+    @objc func addChatButtonTapped() {
+        let newChatVC = NewChatViewController()
+        navigationController?.pushViewController(newChatVC, animated: true)
+    }
+
     func setupRightBarButton(isLoggedin: Bool) {
         if isLoggedin {
             let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(onLogOutBarButtonTapped))
@@ -100,11 +97,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             navigationItem.rightBarButtonItem = loginButton
         }
     }
-    
+
     @objc func onSignInBarButtonTapped() {
         presentLoginScreen()
     }
-    
+
     @objc func onLogOutBarButtonTapped() {
         let logoutAlert = UIAlertController(title: "Logging out!", message: "Are you sure you want to log out?", preferredStyle: .actionSheet)
         logoutAlert.addAction(UIAlertAction(title: "Yes, log out!", style: .default, handler: { _ in
@@ -118,35 +115,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         logoutAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(logoutAlert, animated: true)
     }
-    
-    // MARK: - Firestore Data Fetching
+
     private func observeChats() {
         guard let currentUserEmail = currentUser?.email else { return }
+        
         db.collection("users").document(currentUserEmail).collection("chats").addSnapshotListener { [weak self] (querySnapshot, error) in
             guard let self = self else { return }
             if let error = error {
                 print("Error fetching chats: \(error)")
                 return
             }
-            
+
             self.chatsList = querySnapshot?.documents.compactMap { document in
                 let data = document.data()
-                let senderName = data["senderName"] as? String ?? "Unknown"
+                let senderName = data["friendName"] as? String ?? "Unknown"
                 let lastMessage = data["lastMessage"] as? String ?? ""
                 let timestamp = data["timestamp"] as? String ?? ""
                 return Chat(senderName: senderName, lastMessage: lastMessage, timestamp: timestamp)
             } ?? []
-            
+
             self.chatsList.sort { $0.timestamp > $1.timestamp }
             self.mainScreen.tableViewChats.reloadData()
         }
     }
 
-    // MARK: - UITableViewDataSource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatsList.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Configs.tableViewChatsID, for: indexPath) as! ChatTableViewCell
         let chat = chatsList[indexPath.row]
@@ -155,8 +151,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.labelTimestamp.text = chat.timestamp
         return cell
     }
-    
-    // MARK: - UITableViewDelegate Method
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatVC = ChatMessageViewController()
         chatVC.title = chatsList[indexPath.row].senderName

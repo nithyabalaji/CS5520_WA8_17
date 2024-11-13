@@ -24,7 +24,7 @@ class ChatsTableViewManager: NSObject, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Configs.tableViewChatsID, for: indexPath) as! ChatTableViewCell
         let chat = chatsList[indexPath.row]
-        cell.labelSenderName.text = chat.senderName
+        cell.labelSenderName.text = chat.senderName  // Updated from friendName to senderName
         cell.labelMessage.text = chat.lastMessage
         cell.labelTimestamp.text = chat.timestamp
         return cell
@@ -32,7 +32,7 @@ class ChatsTableViewManager: NSObject, UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatVC = ChatMessageViewController()
-        chatVC.title = chatsList[indexPath.row].senderName
+        chatVC.title = chatsList[indexPath.row].senderName  // Updated from friendName to senderName
         navigationController?.pushViewController(chatVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -41,4 +41,3 @@ class ChatsTableViewManager: NSObject, UITableViewDelegate, UITableViewDataSourc
         self.chatsList = chatsList
     }
 }
-
