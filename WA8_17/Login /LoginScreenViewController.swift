@@ -27,7 +27,7 @@ class LoginScreenViewController: UIViewController {
         loginScreen.registerButton.addTarget(self, action: #selector(onButtonRegisterTapped), for: .touchUpInside)
     }
     
-    @objc func onButtonLoginTapped(){
+    @objc func onButtonLoginTapped() {
         let emailInput = loginScreen.emailTextField.text
         let passwordInput = loginScreen.passwordTextField.text
         if let email = emailInput, let password = passwordInput {
@@ -40,22 +40,14 @@ class LoginScreenViewController: UIViewController {
         }
     }
     
-    func login(email: String, password: String){
-        //self.showActivityIndicator()
-        //MARK: authenticating the user...
-        Auth.auth().signIn(withEmail: email, password: password, completion: {(result, error) in
-            if error == nil{
-                //MARK: user authenticated...
-                //self.hideActivityIndicator()
-                self.navigationController?.popViewController(animated: true)
-            }else{
-                //MARK: alert that no user found or password wrong...
-                print(error)
-                if let errorMsg = error?.localizedDescription {
-                    self.loginScreen.errorLabel.text = "Incorrect email or password."
-                }
+    func login(email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if error == nil {
+                self.dismiss(animated: true)
+            } else {
+                self.loginScreen.errorLabel.text = "Incorrect email or password."
             }
-        })
+        }
     }
     
     @objc func onButtonRegisterTapped() {
@@ -63,12 +55,7 @@ class LoginScreenViewController: UIViewController {
         navigationController?.pushViewController(registerController, animated: true)
     }
 
-    
-    
-    
-    @objc func hideKeyboardOnTap(){
-        //MARK: removing the keyboard from screen...
+    @objc func hideKeyboardOnTap() {
         view.endEditing(true)
     }
 }
-
