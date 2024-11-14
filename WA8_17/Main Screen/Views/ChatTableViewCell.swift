@@ -86,6 +86,35 @@ class ChatTableViewCell: UITableViewCell {
                labelMessage.bottomAnchor.constraint(equalTo: wrapperCellView.bottomAnchor, constant: -8)
            ])
        }
+    
+    func setTimestamp(_ timestamp: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z" // Match the input format
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        if let date = dateFormatter.date(from: timestamp) {
+            let now = Date()
+            let timeInterval = now.timeIntervalSince(date)
+
+            if timeInterval < 12 * 60 * 60 { // Less than 12 hours
+                // Display as local time (e.g., "2:55 PM")
+                let timeFormatter = DateFormatter()
+                timeFormatter.dateFormat = "h:mm a" // Format as "2:55 PM"
+                timeFormatter.locale = Locale.current
+                labelTimestamp.text = timeFormatter.string(from: date)
+            } else {
+                // Display as relative time (e.g., "yesterday," "2 days ago")
+                let relativeFormatter = RelativeDateTimeFormatter()
+                relativeFormatter.unitsStyle = .full
+                labelTimestamp.text = relativeFormatter.localizedString(for: date, relativeTo: now)
+            }
+        } else {
+            // Fallback if parsing fails
+            labelTimestamp.text = ""
+        }
+    }
+
        
      
     
