@@ -119,11 +119,57 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private func observeChats() {
         guard let currentUserEmail = currentUser?.email else { return }
         
+
         db.collection("users").document(currentUserEmail).collection("chats").addSnapshotListener { [weak self] (querySnapshot, error) in
             guard let self = self else { return }
             if let error = error {
                 print("Error fetching chats: \(error)")
                 return
+            }
+
+            // Temporary list to store chats as they are fetched
+            var fetchedChatsList: [Chat] = []
+            let dispatchGroup = DispatchGroup()
+
+            // Loop through each chat document
+            querySnapshot?.documents.forEach { chatDocument in
+                let friendName = chatDocument.documentID // Assuming document ID is the friend's name or email
+                dispatchGroup.enter()
+
+                // Fetch the last message from the messages subcollection
+                self.db.collection("users")
+                    .document(currentUserEmail)
+                    .collection("chats")
+                    .document(friendName)
+                    .collection("messages")
+                    .order(by: "timestamp", descending: true)
+                    .limit(to: 1)
+                    .getDocuments { (messageSnapshot, messageError) in
+                        defer { dispatchGroup.leave() }
+
+                        if let messageError = messageError {
+                            print("Error fetching messages for chat with \(friendName): \(messageError)")
+                            return
+                        }
+
+                        if let messageDocument = messageSnapshot?.documents.first {
+                            let data = messageDocument.data()
+                            let lastMessage = data["text"] as? String ?? ""
+                            let timestamp = data["timestamp"] as? Timestamp ?? Timestamp(date: Date())
+
+                            // Append the fetched chat information to the list
+                            fetchedChatsList.append(Chat(senderName: friendName, lastMessage: lastMessage, timestamp: timestamp.dateValue().description))
+                        } else {
+                            print("No messages found for chat with \(friendName)")
+                            fetchedChatsList.append(Chat(senderName: friendName, lastMessage: "", timestamp: ""))
+                        }
+                    }
+            }
+
+            // After all messages have been fetched, update the chats list
+            dispatchGroup.notify(queue: .main) {
+                self.chatsList = fetchedChatsList.sorted { $0.timestamp > $1.timestamp }
+                self.mainScreen.tableViewChats.reloadData()
             }
 
             self.chatsList = querySnapshot?.documents.compactMap { document in
@@ -136,6 +182,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             self.chatsList.sort { $0.timestamp > $1.timestamp }
             self.mainScreen.tableViewChats.reloadData()
+
         }
     }
 
