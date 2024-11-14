@@ -115,12 +115,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         logoutAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(logoutAlert, animated: true)
     }
-    
 
     private func observeChats() {
         guard let currentUserEmail = currentUser?.email else { return }
+        
 
-        // Observe the user's chats collection
         db.collection("users").document(currentUserEmail).collection("chats").addSnapshotListener { [weak self] (querySnapshot, error) in
             guard let self = self else { return }
             if let error = error {
@@ -172,6 +171,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.chatsList = fetchedChatsList.sorted { $0.timestamp > $1.timestamp }
                 self.mainScreen.tableViewChats.reloadData()
             }
+
+            self.chatsList = querySnapshot?.documents.compactMap { document in
+                let data = document.data()
+                let senderName = data["friendName"] as? String ?? "Unknown"
+                let lastMessage = data["lastMessage"] as? String ?? ""
+                let timestamp = data["timestamp"] as? String ?? ""
+                return Chat(senderName: senderName, lastMessage: lastMessage, timestamp: timestamp)
+            } ?? []
+
+            self.chatsList.sort { $0.timestamp > $1.timestamp }
+            self.mainScreen.tableViewChats.reloadData()
+
         }
     }
 
