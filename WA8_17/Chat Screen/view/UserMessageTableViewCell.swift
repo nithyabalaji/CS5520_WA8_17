@@ -10,12 +10,13 @@ import UIKit
 class UserMessageTableViewCell: UITableViewCell {
     let messageLabel = UILabel()
     let messageBackgroundView = UIView()
-        
+    let timestampLabel = UILabel()
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             
             setupMessageBackgroundView()
             setupMessageLabel()
+            setupTimestampLabel()
             setupConstraints()
         }
         
@@ -37,6 +38,13 @@ class UserMessageTableViewCell: UITableViewCell {
             messageLabel.translatesAutoresizingMaskIntoConstraints = false
             messageBackgroundView.addSubview(messageLabel)
         }
+    func setupTimestampLabel() {
+            timestampLabel.font = UIFont.systemFont(ofSize: 12)
+            timestampLabel.textColor = .lightGray
+            timestampLabel.textAlignment = .right
+            timestampLabel.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(timestampLabel)
+        }
         
          func setupConstraints() {
             NSLayoutConstraint.activate([
@@ -50,7 +58,11 @@ class UserMessageTableViewCell: UITableViewCell {
                 messageLabel.topAnchor.constraint(equalTo: messageBackgroundView.topAnchor, constant: 8),
                 messageLabel.bottomAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: -8),
                 messageLabel.leadingAnchor.constraint(equalTo: messageBackgroundView.leadingAnchor, constant: 12),
-                messageLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -12)
+                messageLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -12),
+                
+                timestampLabel.topAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: 4),
+                           timestampLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -8),
+                           timestampLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
             ])
         }
         
