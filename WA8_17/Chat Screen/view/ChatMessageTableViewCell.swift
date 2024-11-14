@@ -33,10 +33,10 @@ class ChatMessageTableViewCell: UITableViewCell {
         }
     func setupTimestampLabel() {
             timestampLabel.font = UIFont.systemFont(ofSize: 12)
-            timestampLabel.textColor = .gray
+            timestampLabel.textColor = .black
             timestampLabel.textAlignment = .right
             timestampLabel.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(timestampLabel)
+        messageBackgroundView.addSubview(timestampLabel)
         }
         
          func setupMessageLabel() {
@@ -47,26 +47,26 @@ class ChatMessageTableViewCell: UITableViewCell {
             messageBackgroundView.addSubview(messageLabel)
         }
         
-         func setupConstraints() {
-            NSLayoutConstraint.activate([
-                // Background view constraints
-                messageBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-                messageBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-                messageBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                messageBackgroundView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.centerXAnchor),
-                
-                // Message label constraints
-                messageLabel.topAnchor.constraint(equalTo: messageBackgroundView.topAnchor, constant: 8),
-                messageLabel.bottomAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: -8),
-                messageLabel.leadingAnchor.constraint(equalTo: messageBackgroundView.leadingAnchor, constant: 12),
-                messageLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -12),
-                
-                timestampLabel.topAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: 4),
-                timestampLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -8),
-                timestampLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            // Background view constraints
+            messageBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            messageBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            messageBackgroundView.trailingAnchor.constraint(lessThanOrEqualTo: contentView.centerXAnchor),
 
-            ])
-        }
+            // Message label constraints
+            messageLabel.topAnchor.constraint(equalTo: messageBackgroundView.topAnchor, constant: 8),
+            messageLabel.bottomAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: -8),
+            messageLabel.leadingAnchor.constraint(equalTo: messageBackgroundView.leadingAnchor, constant: 12),
+            messageLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -12),
+            
+            // Timestamp label constraints
+            timestampLabel.topAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: 2),
+            timestampLabel.leadingAnchor.constraint(equalTo: messageBackgroundView.leadingAnchor, constant: 0),
+            timestampLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+        ])
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

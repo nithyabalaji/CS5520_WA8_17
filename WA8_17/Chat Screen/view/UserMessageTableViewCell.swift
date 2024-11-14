@@ -43,26 +43,26 @@ class UserMessageTableViewCell: UITableViewCell {
             timestampLabel.textColor = .lightGray
             timestampLabel.textAlignment = .right
             timestampLabel.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(timestampLabel)
+        messageBackgroundView.addSubview(timestampLabel)
         }
         
          func setupConstraints() {
             NSLayoutConstraint.activate([
                 // Background view constraints
-                messageBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-                messageBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-                messageBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                messageBackgroundView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.centerXAnchor),
-                
+                messageBackgroundView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor, constant: 8),
+                            messageBackgroundView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: -8),
+                            messageBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                            messageBackgroundView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.centerXAnchor),
+              
                 // Message label constraints
                 messageLabel.topAnchor.constraint(equalTo: messageBackgroundView.topAnchor, constant: 8),
                 messageLabel.bottomAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: -8),
                 messageLabel.leadingAnchor.constraint(equalTo: messageBackgroundView.leadingAnchor, constant: 12),
                 messageLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -12),
                 
-                timestampLabel.topAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: 4),
-                           timestampLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -8),
-                           timestampLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+                timestampLabel.topAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: 0),
+                timestampLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -8),
+                //timestampLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
             ])
         }
         
