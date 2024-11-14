@@ -2,7 +2,7 @@
 //  ChatMessageViewController.swift
 //  WA8_17
 //
-//  Created by Ashmitha appandaraju on 11/12/24.
+//  Created by Nishy Ann Tomy on 11/12/24.
 //
 
 import UIKit
@@ -116,23 +116,70 @@ class ChatMessageViewController: UIViewController {
         let currentUserMessageData: [String: Any] = [
             "text": messageText,
             "timestamp": FieldValue.serverTimestamp(),
-            "isSentByCurrentUser": true // Current user is sending this message
+            "isSentByCurrentUser": true
         ]
 
         // Define message data for friend
         let friendMessageData: [String: Any] = [
             "text": messageText,
             "timestamp": FieldValue.serverTimestamp(),
-            "isSentByCurrentUser": false // Friend is receiving this message
+            "isSentByCurrentUser": false
         ]
 
-        // Store the message in Firestore for the current user
-        db.collection("users")
-            .document(currentUserEmail)
-            .collection("chats")
-            .document(friendEmail)
-            .collection("messages")
-            .addDocument(data: currentUserMessageData) { [weak self] error in
+        // Define initial chat data
+        let initialChatData: [String: Any] = [
+            "friendEmail": friendEmail,
+            "createdAt": FieldValue.serverTimestamp()
+        ]
+
+        let currentUserChatRef = db.collection("users")
+                                    .document(currentUserEmail)
+                                    .collection("chats")
+                                    .document(friendEmail)
+
+        // Check if the chat document exists for the current user
+        currentUserChatRef.getDocument { [weak self] (document, error) in
+            if let error = error {
+                print("Error checking chat document: \(error)")
+                return
+            }
+
+            // If the chat document does not exist, create it
+            if document?.exists == false {
+                currentUserChatRef.setData(initialChatData, merge: true) { error in
+                    if let error = error {
+                        print("Error creating chat document: \(error)")
+                        return
+                    }
+                    // After creating the chat, add the message to the current user's messages
+                    self?.addMessageToCurrentUserChat(currentUserChatRef, messageData: currentUserMessageData)
+                }
+            } else {
+                // If the chat document exists, add the message as usual
+                self?.addMessageToCurrentUserChat(currentUserChatRef, messageData: currentUserMessageData)
+            }
+        }
+
+        // Create or update the chat document for the friend and add the message
+        let friendChatRef = db.collection("users")
+                              .document(friendEmail)
+                              .collection("chats")
+                              .document(currentUserEmail)
+        friendChatRef.setData(["friendEmail": currentUserEmail, "createdAt": FieldValue.serverTimestamp()], merge: true) { error in
+            if let error = error {
+                print("Error creating chat document for friend: \(error)")
+                return
+            }
+            // Add the message to the friend's messages subcollection
+            friendChatRef.collection("messages")
+                .addDocument(data: friendMessageData)
+        }
+    }
+
+    // Helper function to add message to current user's messages subcollection
+    private func addMessageToCurrentUserChat(_ chatRef: DocumentReference, messageData: [String: Any]) {
+        chatRef.collection("messages")
+            .addDocument(data: messageData) { [weak self] error in
                 if let error = error {
                     print("Error sending message: \(error)")
                 } else {
@@ -140,15 +187,8 @@ class ChatMessageViewController: UIViewController {
                     self?.fetchMessages() // Optionally refresh messages
                 }
             }
-
-        // Store the message in Firestore for the friend
-        db.collection("users")
-            .document(friendEmail)
-            .collection("chats")
-            .document(currentUserEmail)
-            .collection("messages")
-            .addDocument(data: friendMessageData)
     }
+
 
 }
 

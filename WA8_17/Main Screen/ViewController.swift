@@ -195,7 +195,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let chat = chatsList[indexPath.row]
         cell.labelSenderName.text = chat.senderName
         cell.labelMessage.text = chat.lastMessage
-        cell.labelTimestamp.text = chat.timestamp
+        cell.setTimestamp(chat.timestamp)
         return cell
     }
 

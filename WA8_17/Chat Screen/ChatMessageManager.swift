@@ -23,10 +23,10 @@ extension ChatMessageViewController: UITableViewDelegate, UITableViewDataSource 
         
         if let userCell = cell as? UserMessageTableViewCell {
             userCell.setMessage(message.text)
-            userCell.timestampLabel.text = message.timeStamp
+            userCell.setTimestamp(message.timeStamp)
         } else if let friendCell = cell as? ChatMessageTableViewCell {
-            friendCell.messageLabel.text = message.text
-            friendCell.timestampLabel.text = message.timeStamp
+            friendCell.setMessage(message.text)
+            friendCell.setTimestamp(message.timeStamp)
         }
         
         return cell
