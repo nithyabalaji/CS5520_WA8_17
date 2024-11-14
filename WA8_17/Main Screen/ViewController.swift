@@ -59,7 +59,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     private func presentLoginScreen() {
-        let loginController = LoginScreenViewController()
+        let loginController = UINavigationController(rootViewController: LoginScreenViewController())
         loginController.modalPresentationStyle = .fullScreen
         present(loginController, animated: true, completion: nil)
     }
