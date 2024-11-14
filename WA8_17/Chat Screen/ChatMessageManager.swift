@@ -12,18 +12,21 @@ extension ChatMessageViewController: UITableViewDelegate, UITableViewDataSource{
             return messages.count
         }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let message = messages[indexPath.row]
+            let cellIdentifier = message.isSentByCurrentUser ? "UserMessageTableViewCell" : "ChatMessageTableViewCell"
             
-            if message.isCurrentUser {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "UserMessageTableViewCell", for: indexPath) as! UserMessageTableViewCell
-                cell.setMessage(message.text)
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageTableViewCell", for: indexPath) as! ChatMessageTableViewCell
-                cell.messageLabel.text = message.text
-                return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+            
+            if let userCell = cell as? UserMessageTableViewCell {
+                userCell.setMessage(message.text)
+                userCell.timestampLabel.text = message.timeStamp
+            } else if let friendCell = cell as? ChatMessageTableViewCell {
+                friendCell.messageLabel.text = message.text
+                friendCell.timestampLabel.text = message.timeStamp
             }
+            
+            return cell
         }
         
         // MARK: - UITableView Delegate Methods
