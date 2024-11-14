@@ -9,57 +9,40 @@ import UIKit
 
 class NewChatViewTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    //static let identifier = "UserTableViewCell"
     var wrapperCellView: UIView!
-       var labelName: UILabel!
-       
-       override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-           super.init(style: style, reuseIdentifier: reuseIdentifier)
-           setupWrapperCellView()
-           setupLabelName()
-           initConstraints()
-       }
-       
-       required init?(coder: NSCoder) {
-           fatalError("init(coder:) has not been implemented")
-       }
-       
-       // MARK: - Setting up UI elements
-       
+    var labelName: UILabel!
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupWrapperCellView()
+        setupLabelName()
+        initConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func setupWrapperCellView() {
-           wrapperCellView = UIView()
-           wrapperCellView.backgroundColor = .white
-           wrapperCellView.layer.cornerRadius = 6.0
-           wrapperCellView.layer.shadowColor = UIColor.gray.cgColor
-           wrapperCellView.layer.shadowOffset = .zero
-           wrapperCellView.layer.shadowRadius = 4.0
-           wrapperCellView.layer.shadowOpacity = 0.4
-           wrapperCellView.translatesAutoresizingMaskIntoConstraints = false
-           self.addSubview(wrapperCellView)
-       }
-       
-       func setupLabelName() {
-           labelName = UILabel()
-           labelName.font = UIFont.boldSystemFont(ofSize: 16)
-           labelName.textColor = .black
-           labelName.translatesAutoresizingMaskIntoConstraints = false
-           wrapperCellView.addSubview(labelName)
-       }
-    
-    
-   
-       // MARK: - Setting up constraints
-       
+        wrapperCellView = UIView()
+        wrapperCellView.backgroundColor = .white
+        wrapperCellView.layer.cornerRadius = 6.0
+        wrapperCellView.layer.shadowColor = UIColor.gray.cgColor
+        wrapperCellView.layer.shadowOffset = .zero
+        wrapperCellView.layer.shadowRadius = 4.0
+        wrapperCellView.layer.shadowOpacity = 0.4
+        wrapperCellView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(wrapperCellView)
+    }
+
+    func setupLabelName() {
+        labelName = UILabel()
+        labelName.font = UIFont.boldSystemFont(ofSize: 16)
+        labelName.textColor = .black
+        labelName.translatesAutoresizingMaskIntoConstraints = false
+        wrapperCellView.addSubview(labelName)
+    }
+
     func initConstraints() {
         NSLayoutConstraint.activate([
             // Wrapper view constraints
@@ -74,8 +57,4 @@ class NewChatViewTableViewCell: UITableViewCell {
             labelName.trailingAnchor.constraint(equalTo: wrapperCellView.trailingAnchor, constant: -16)
         ])
     }
-
-
-
-       
 }

@@ -201,7 +201,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chatVC = ChatMessageViewController()
-        chatVC.title = chatsList[indexPath.row].senderName
+        let selectedChat = chatsList[indexPath.row]
+        chatVC.title = selectedChat.senderName
+        chatVC.friendEmail = selectedChat.senderName
         navigationController?.pushViewController(chatVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

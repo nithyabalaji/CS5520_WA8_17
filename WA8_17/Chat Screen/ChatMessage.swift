@@ -9,5 +9,6 @@ import Foundation
 
 struct ChatMessage {
     let text: String
-    let isCurrentUser: Bool 
+    let timeStamp: String
+    let isSentByCurrentUser: Bool
 }
