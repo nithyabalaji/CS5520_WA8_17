@@ -62,7 +62,8 @@ class LoginScreenView: UIView {
         passwordTextField = UITextField()
         passwordTextField.placeholder = "Password"
         passwordTextField.borderStyle = .roundedRect
-        passwordTextField.font = emailTextField.font?.withSize(16)
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.font = passwordTextField.font?.withSize(16)
         addSubviewToContainer(subview: passwordTextField)
     }
     
