@@ -9,36 +9,36 @@ import UIKit
 
 class NewChatView: UIView {
 
-       var labelText: UILabel!
-       var tableViewUsers: UITableView!
-       
-       override init(frame: CGRect) {
-           super.init(frame: frame)
-           self.backgroundColor = .white
-           
-           setupLabelText()
-           setupTableViewUsers()
-           initConstraints()
-       }
-       
-       // MARK: - Setting up UI elements
-       
-       func setupLabelText() {
-           labelText = UILabel()
-           labelText.font = .boldSystemFont(ofSize: 18)
-           labelText.text = "Users"
-           labelText.translatesAutoresizingMaskIntoConstraints = false
-           self.addSubview(labelText)
-       }
-       
+    var labelText: UILabel!
+    var tableViewUsers: UITableView!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        
+        setupLabelText()
+        setupTableViewUsers()
+        initConstraints()
+    }
+    
+    // MARK: - Setting up UI elements
+    
+    func setupLabelText() {
+        labelText = UILabel()
+        labelText.font = .boldSystemFont(ofSize: 18)
+        labelText.text = "Users"  // Heading for the user list
+        labelText.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(labelText)
+    }
+    
     func setupTableViewUsers() {
         tableViewUsers = UITableView()
-        tableViewUsers.register(NewChatViewTableViewCell.self, forCellReuseIdentifier: Configs.tableviewUserID)
+        tableViewUsers.register(NewChatViewTableViewCell.self, forCellReuseIdentifier: Configs.tableviewUserID) // Register the cell class with the identifier
         tableViewUsers.translatesAutoresizingMaskIntoConstraints = false
-        tableViewUsers.rowHeight = 80
+        tableViewUsers.rowHeight = 80 // Adjust row height as needed
         self.addSubview(tableViewUsers)
     }
-       
+    
     func initConstraints() {
         NSLayoutConstraint.activate([
             // Label constraints
@@ -53,12 +53,8 @@ class NewChatView: UIView {
             tableViewUsers.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-
-
-
-       
-       required init?(coder: NSCoder) {
-           fatalError("init(coder:) has not been implemented")
-       }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

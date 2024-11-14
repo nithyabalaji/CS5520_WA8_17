@@ -6,47 +6,78 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
 class NewChatViewController: UIViewController {
-    let usersView = NewChatView()
-    var userlist = [User]()
+    
+    // Properties
+    var usersList = [AppUser]() // Array to store registered users
     let db = Firestore.firestore()
+    let newChatView = NewChatView()
 
     override func loadView() {
-        view = usersView
+        view = newChatView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Your Friends"
         
-        // Assign delegate and data source
-        usersView.tableViewUsers.delegate = self
-        usersView.tableViewUsers.dataSource = self
-        usersView.tableViewUsers.register(NewChatViewTableViewCell.self, forCellReuseIdentifier: Configs.tableviewUserID)
-        
-        fetchUsers()
+        title = "Your Friends"
+        navigationController?.navigationBar.prefersLargeTitles = true
+
+        // Set up the table view
+        newChatView.tableViewUsers.delegate = self
+        newChatView.tableViewUsers.dataSource = self
+
+        // Fetch all users from Firestore
+        fetchAllUsers()
     }
 
-    // MARK: - Fetch Users from Firestore
-    private func fetchUsers() {
+    private func fetchAllUsers() {
         db.collection("users").getDocuments { [weak self] (snapshot, error) in
-            guard let self = self else { return }
             if let error = error {
                 print("Error fetching users: \(error)")
                 return
             }
-            
-            self.userlist = snapshot?.documents.compactMap { document in
+
+            // Clear the existing user list
+            self?.usersList.removeAll()
+
+            // Populate usersList with fetched data
+            snapshot?.documents.forEach { document in
                 let data = document.data()
-                let name = data["Name"] as? String ?? "Unknown"
-                let email = data["Email"] as? String ?? ""
-                return User(Name: name, Email: email)
-            } ?? []
-            
-            DispatchQueue.main.async {
-                self.usersView.tableViewUsers.reloadData()
+                let email = data["email"] as? String ?? "No Email"
+                let name = data["name"] as? String ?? "Unknown"
+                let user = AppUser(name: name, email: email)
+                self?.usersList.append(user)
             }
+
+            // Reload the table view with updated user data
+            self?.newChatView.tableViewUsers.reloadData()
         }
+    }
+}
+
+// MARK: - UITableViewDataSource & UITableViewDelegate
+extension NewChatViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return usersList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Configs.tableviewUserID, for: indexPath) as! NewChatViewTableViewCell
+        let user = usersList[indexPath.row]
+        cell.labelName.text = user.name
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedUser = usersList[indexPath.row]
+        let chatVC = ChatMessageViewController()
+        chatVC.friendEmail = selectedUser.email
+        chatVC.title = selectedUser.name
+        navigationController?.pushViewController(chatVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

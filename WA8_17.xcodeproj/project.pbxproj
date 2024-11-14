@@ -36,6 +36,7 @@
 		3FF7DBAB2CDDB1AF00F8B5EF /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DBA52CDDB1AF00F8B5EF /* NewChatViewController.swift */; };
 		3FF7DBAC2CDDB1AF00F8B5EF /* NewChatViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DBA62CDDB1AF00F8B5EF /* NewChatViewTableViewCell.swift */; };
 		3FF7DBAD2CDDB1AF00F8B5EF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF7DBA72CDDB1AF00F8B5EF /* User.swift */; };
+		8239595A2CE5D308005FD5F0 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823959592CE5D301005FD5F0 /* AppUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		3FF7DBA52CDDB1AF00F8B5EF /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
 		3FF7DBA62CDDB1AF00F8B5EF /* NewChatViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewTableViewCell.swift; sourceTree = "<group>"; };
 		3FF7DBA72CDDB1AF00F8B5EF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		823959592CE5D301005FD5F0 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -180,6 +182,7 @@
 				3FF7DBA52CDDB1AF00F8B5EF /* NewChatViewController.swift */,
 				3FF7DBAE2CDDB1BD00F8B5EF /* View */,
 				3FF7DBA72CDDB1AF00F8B5EF /* User.swift */,
+				823959592CE5D301005FD5F0 /* AppUser.swift */,
 			);
 			path = "All User Screen";
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				3FF7DBAC2CDDB1AF00F8B5EF /* NewChatViewTableViewCell.swift in Sources */,
 				3F7DDD682CE29258004A5149 /* ChatMessage.swift in Sources */,
 				3FF7DBAD2CDDB1AF00F8B5EF /* User.swift in Sources */,
+				8239595A2CE5D308005FD5F0 /* AppUser.swift in Sources */,
 				3FF7DB912CDD36C400F8B5EF /* Chat.swift in Sources */,
 				29FBFA922CDAD99100F8EC88 /* AppDelegate.swift in Sources */,
 				3FF7DB8F2CDD36B300F8B5EF /* ChatTableViewCell.swift in Sources */,
