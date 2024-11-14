@@ -1,6 +1,8 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
+
 
 class RegisterScreenViewController: UIViewController {
     
@@ -47,10 +49,26 @@ class RegisterScreenViewController: UIViewController {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 self.registerScreen.errorLabel.text = error.localizedDescription
-            } else {
-                // Registration successful, navigate to the login screen or main app
-                self.navigationController?.popViewController(animated: true)
+            } else if let authResult = authResult {
+                // Registration successful, save user details to Firestore
+                let userName = self.registerScreen.nameTextField.text ?? "Anonymous"
+                
+                // Set user data in Firestore
+                let userData: [String: Any] = [
+                    "name": userName,
+                    "email": email,
+                ]
+                
+                Firestore.firestore().collection("users").document(email).setData(userData) { error in
+                    if let error = error {
+                        self.registerScreen.errorLabel.text = "Error saving user data: \(error.localizedDescription)"
+                    } else {
+                        // Successfully saved user data, navigate to main screen
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
             }
         }
     }
+
 }
