@@ -43,32 +43,62 @@ class UserMessageTableViewCell: UITableViewCell {
             timestampLabel.textColor = .lightGray
             timestampLabel.textAlignment = .right
             timestampLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageBackgroundView.addSubview(timestampLabel)
+            messageBackgroundView.addSubview(timestampLabel)
         }
         
          func setupConstraints() {
             NSLayoutConstraint.activate([
                 // Background view constraints
                 messageBackgroundView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor, constant: 8),
-                            messageBackgroundView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: -8),
-                            messageBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                            messageBackgroundView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.centerXAnchor),
+                messageBackgroundView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: -8),
+                messageBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                messageBackgroundView.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.centerXAnchor),
               
                 // Message label constraints
                 messageLabel.topAnchor.constraint(equalTo: messageBackgroundView.topAnchor, constant: 8),
                 messageLabel.bottomAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: -8),
                 messageLabel.leadingAnchor.constraint(equalTo: messageBackgroundView.leadingAnchor, constant: 12),
                 messageLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -12),
-                
+
                 timestampLabel.topAnchor.constraint(equalTo: messageBackgroundView.bottomAnchor, constant: 0),
                 timestampLabel.trailingAnchor.constraint(equalTo: messageBackgroundView.trailingAnchor, constant: -8),
-                //timestampLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+
             ])
         }
         
         func setMessage(_ message: String) {
             messageLabel.text = message
         }
+    
+    func setTimestamp(_ timestamp: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z" // Match the input format
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        if let date = dateFormatter.date(from: timestamp) {
+            let now = Date()
+            let timeInterval = now.timeIntervalSince(date)
+
+            if timeInterval < 12 * 60 * 60 { // Less than 12 hours
+                // Display as local time (e.g., "2:55 PM")
+                let timeFormatter = DateFormatter()
+                timeFormatter.dateFormat = "h:mm a" // Format as "2:55 PM"
+                timeFormatter.locale = Locale.current
+                timestampLabel.text = timeFormatter.string(from: date)
+            } else {
+                // Display as relative time (e.g., "yesterday," "2 days ago")
+                let relativeFormatter = RelativeDateTimeFormatter()
+                relativeFormatter.unitsStyle = .full
+                timestampLabel.text = relativeFormatter.localizedString(for: date, relativeTo: now)
+            }
+        } else {
+            // Fallback if parsing fails
+            timestampLabel.text = ""
+        }
+    }
+
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
