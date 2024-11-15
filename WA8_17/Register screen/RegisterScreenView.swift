@@ -11,6 +11,7 @@ class RegisterScreenView: UIView {
     var repeatPasswordTextField: UITextField!
     var registerButton: UIButton!
     var errorLabel: UILabel!
+    let activityIndicator = UIActivityIndicatorView(style: .large)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,9 +25,22 @@ class RegisterScreenView: UIView {
         setupRepeatPasswordTextField()
         setupRegisterButton()
         setupErrorLabel()
-
+        setupViews()
         initConstraints()
     }
+    private func setupViews() {
+          
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            activityIndicator.hidesWhenStopped = true // Automatically hides when stopped
+            addSubview(activityIndicator)
+
+            // Layout Constraints for Activity Indicator
+            NSLayoutConstraint.activate([
+                activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+                activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+            ])
+        }
+    
 
     func setupContentWrapper() {
         contentWrapper = UIScrollView()

@@ -44,24 +44,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         mainScreen.floatingButtonAddChat.addTarget(self, action: #selector(addChatButtonTapped), for: .touchUpInside)
     }
-
-    func fetchCurrentUserName() {
-        guard let email = Auth.auth().currentUser?.email else { return }
+    
+    func fetchCurrentUserName(completion: @escaping (String) -> Void) {
+        guard let email = Auth.auth().currentUser?.email else {
+            completion("Anonymous")
+            return
+        }
         
         db.collection("users").document(email).getDocument { (document, error) in
             if let document = document, document.exists {
-                self.userName = document.data()?["name"] as? String ?? "Anonymous"
-                self.mainScreen.labelText.text = "Welcome \(self.userName)!"
+                let name = document.data()?["name"] as? String ?? "Anonymous"
+                completion(name)
             } else {
-                print("Document does not exist")
+                print("Error fetching user document: \(error?.localizedDescription ?? "No error info")")
+                completion("Anonymous")
             }
         }
-    }
-
-    private func presentLoginScreen() {
-        let loginController = UINavigationController(rootViewController: LoginScreenViewController())
-        loginController.modalPresentationStyle = .fullScreen
-        present(loginController, animated: true, completion: nil)
     }
 
     private func setupAuthenticatedUI() {
@@ -69,7 +67,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             guard let self = self else { return }
             if let user = user {
                 self.currentUser = user
-                self.fetchCurrentUserName()
+                self.fetchCurrentUserName { userName in
+                    DispatchQueue.main.async {
+                        self.userName = userName
+                        self.mainScreen.labelText.text = "Welcome \(self.userName)!"
+                    }
+                }
                 self.mainScreen.floatingButtonAddChat.isEnabled = true
                 self.mainScreen.floatingButtonAddChat.isHidden = false
                 self.setupRightBarButton(isLoggedin: true)
@@ -82,6 +85,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
+
+
+
+    private func presentLoginScreen() {
+        let loginController = UINavigationController(rootViewController: LoginScreenViewController())
+        loginController.modalPresentationStyle = .fullScreen
+        present(loginController, animated: true, completion: nil)
+    }
+
+
 
     @objc func addChatButtonTapped() {
         let newChatVC = NewChatViewController()
